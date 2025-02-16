@@ -42,7 +42,7 @@ variable "user_passowrd" {
 locals {
   group_name    = "AZ700-${var.group_postfix}"
   location      = "japaneast"
-  random_str    = "cat"
+  random_str    = "gsd"
   vm_size       = "Standard_B4ms"
   lab01_name    = "lab01"
   lab01a_name   = "lab01a"
@@ -50,6 +50,8 @@ locals {
   lab01c_name   = "lab01c"
   lab01d_name   = "lab01d"
   lab02_name    = "lab02"
+  lab02a_name   = "lab02a"
+  lab02b_name   = "lab02b"
   lab03_name    = "lab03"
   lab04_name    = "lab04"
   lab06a_name   = "lab06a"
