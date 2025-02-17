@@ -1,4 +1,4 @@
-# LAB-05-B-VPN-GW
+# LAB-02-A-VPN-GW
 resource "azurerm_virtual_network" "lab02a" {
   name                = "${local.lab02a_name}-vnet-${local.random_str}"
   address_space       = ["10.1.0.0/16"]

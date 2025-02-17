@@ -110,6 +110,10 @@ resource "azurerm_windows_virtual_machine" "lab01b" {
   network_interface_ids = [azurerm_network_interface.lab01b.id]
   size                  = local.vm_size
 
+  # depends_on = [
+  #   azurerm_network_interface.lab01b
+  # ]
+
   os_disk {
     name                 = "${local.lab01b_name}-osdisk-${local.random_str}"
     caching              = "ReadWrite"
@@ -145,23 +149,6 @@ resource "azurerm_virtual_machine_extension" "lab01bscript" {
         "commandToExecute": "powershell.exe Install-WindowsFeature -name Web-Server -IncludeManagementTools && powershell.exe remove-item 'C:\\inetpub\\wwwroot\\iisstart.htm' && powershell.exe Add-Content -Path 'C:\\inetpub\\wwwroot\\iisstart.htm' -Value $('Hello World from ' + $env:computername)"
     }
   SETTINGS
-
-  tags = {
-    environment = local.group_name
-  }
-}
-
-## LAB-01-ROUTE-TABLE
-resource "azurerm_route_table" "lab01" {
-  name                = "${local.lab01_name}-routes-${local.random_str}"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-
-  route {
-    name           = "${local.lab01_name}-route-${local.random_str}"
-    address_prefix = "10.0.0.0/16"
-    next_hop_type  = "VnetLocal"
-  }
 
   tags = {
     environment = local.group_name
