@@ -295,6 +295,8 @@ https://mslabs.cloudguides.com/guides/AZ-700%20Exam%20Guide%20-%20Microsoft%20Az
 [Upgrading from Basic Load Balancer - Guidance](https://learn.microsoft.com/azure/load-balancer/load-balancer-basic-upgrade-guidance)
 
 #### Configuration and Management
+[Azure Load Balancer algorithm](https://learn.microsoft.com/en-us/azure/load-balancer/concepts)
+
 [Quickstart: Create a public load balancer to load balance VMs using the Azure portal](https://learn.microsoft.com/azure/load-balancer/quickstart-load-balancer-standard-public-portal)
 
 [Quickstart: Create an internal load balancer to load balance VMs using the Azure portal](https://learn.microsoft.com/azure/load-balancer/quickstart-load-balancer-standard-internal-portal)
@@ -326,7 +328,9 @@ https://mslabs.cloudguides.com/guides/AZ-700%20Exam%20Guide%20-%20Microsoft%20Az
 
 [Traffic Manager routing methods](https://learn.microsoft.com/azure/traffic-manager/traffic-manager-routing-methods)
 
-### Configuration
+[Nested Traffic Manager profiles](https://learn.microsoft.com/en-us/azure/traffic-manager/traffic-manager-nested-profiles)
+
+#### Configuration
 [Traffic Manager endpoints](https://learn.microsoft.com/azure/traffic-manager/traffic-manager-endpoint-types)
 
 [Traffic Manager endpoint monitoring](https://learn.microsoft.com/azure/traffic-manager/traffic-manager-monitoring)
