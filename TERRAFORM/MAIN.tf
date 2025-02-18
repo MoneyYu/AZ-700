@@ -16,7 +16,7 @@ terraform {
     }
     time = {
       source  = "hashicorp/time"
-      version = "0.9.1"
+      version = "~>0.9.1"
     }
   }
 }
@@ -54,8 +54,8 @@ locals {
   lab02b_name   = "lab02b"
   lab03_name    = "lab03"
   lab04_name    = "lab04"
-  lab04a_name    = "lab04a"
-  lab04b_name    = "lab04b"
+  lab04a_name   = "lab04a"
+  lab04b_name   = "lab04b"
   lab05a_name   = "lab05a"
   lab05b_name   = "lab05b"
   lab06a_name   = "lab06a"
@@ -64,7 +64,11 @@ locals {
   lab06d_name   = "lab06d"
   lab06e_name   = "lab06e"
   lab07_name    = "lab07"
+  lab07a_name   = "lab07a"
+  lab07b_name   = "lab07b"
   lab08_name    = "lab08"
+  lab08a_name   = "lab08a"
+  lab08b_name   = "lab08b"
   lab09a_name   = "lab09a"
   lab09b_name   = "lab09b"
   lab09c_name   = "lab09c"

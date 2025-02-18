@@ -75,7 +75,7 @@ resource "azurerm_windows_virtual_machine" "lab01" {
   os_disk {
     name                 = "${local.lab01_name}-osdisk-${local.random_str}"
     caching              = "ReadWrite"
-    storage_account_type = "Premium_LRS"
+    storage_account_type = "Standard_LRS"
   }
 
   source_image_reference {

@@ -1,3 +1,4 @@
+## LAB-06-B-NSG
 resource "azurerm_network_security_group" "lab06b" {
   name                = "${local.lab06b_name}-nsg-${local.random_str}"
   location            = azurerm_resource_group.rg.location
@@ -16,6 +17,6 @@ resource "azurerm_network_security_group" "lab06b" {
   }
 
   tags = {
-    environment = "Production"
+    environment = local.group_name
   }
 }

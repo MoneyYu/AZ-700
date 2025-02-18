@@ -110,8 +110,8 @@ resource "azurerm_network_interface" "lab04a01" {
   }
 }
 
-resource "azurerm_network_interface_security_group_association" "lab04a01" {
-  network_interface_id      = azurerm_network_interface.lab04a01.id
+resource "azurerm_subnet_network_security_group_association" "lab04a" {
+  subnet_id                 = azurerm_subnet.lab04a.id
   network_security_group_id = azurerm_network_security_group.lab04a.id
 }
 
@@ -131,7 +131,7 @@ resource "azurerm_windows_virtual_machine" "lab04a01" {
   os_disk {
     name                 = "${local.lab04a_name}-osdisk-01-${local.random_str}"
     caching              = "ReadWrite"
-    storage_account_type = "Premium_LRS"
+    storage_account_type = "Standard_LRS"
   }
 
   source_image_reference {
@@ -185,11 +185,6 @@ resource "azurerm_network_interface" "lab04a02" {
   }
 }
 
-resource "azurerm_network_interface_security_group_association" "lab04a02" {
-  network_interface_id      = azurerm_network_interface.lab04a02.id
-  network_security_group_id = azurerm_network_security_group.lab04a.id
-}
-
 resource "azurerm_network_interface_backend_address_pool_association" "lab04a02" {
   network_interface_id    = azurerm_network_interface.lab04a02.id
   ip_configuration_name   = "${local.lab04a_name}-nic-ipconfig-02-${local.random_str}"
@@ -206,7 +201,7 @@ resource "azurerm_windows_virtual_machine" "lab04a02" {
   os_disk {
     name                 = "${local.lab04a_name}-osdisk-02-${local.random_str}"
     caching              = "ReadWrite"
-    storage_account_type = "Premium_LRS"
+    storage_account_type = "Standard_LRS"
   }
 
   source_image_reference {

@@ -5,7 +5,7 @@ resource "azurerm_traffic_manager_profile" "lab04b" {
   traffic_routing_method = "Priority"
   dns_config {
     relative_name = "${local.lab04b_name}-tfm-${local.random_str}"
-    ttl           = 30
+    ttl           = 10
   }
 
   monitor_config {
@@ -13,6 +13,9 @@ resource "azurerm_traffic_manager_profile" "lab04b" {
     port                        = 443
     path                        = "/"
     expected_status_code_ranges = ["200-202", "301-302"]
+    interval_in_seconds = 10
+    timeout_in_seconds  = 5
+    tolerated_number_of_failures = 0
   }
 
   tags = {
@@ -21,7 +24,7 @@ resource "azurerm_traffic_manager_profile" "lab04b" {
 }
 
 resource "azurerm_traffic_manager_azure_endpoint" "lab04b01" {
-  name                 = "${local.lab04b_name}-tfm-endpoint-eastus-${local.random_str}"
+  name                 = "${local.lab04b_name}-tfm-endpoint-01-${local.random_str}"
   profile_id           = azurerm_traffic_manager_profile.lab04b.id
   always_serve_enabled = true
   weight               = 100
@@ -29,28 +32,12 @@ resource "azurerm_traffic_manager_azure_endpoint" "lab04b01" {
 }
 
 resource "azurerm_traffic_manager_azure_endpoint" "lab04b02" {
-  name                 = "${local.lab04b_name}-tfm-endpoint-westus-${local.random_str}"
+  name                 = "${local.lab04b_name}-tfm-endpoint-02-${local.random_str}"
   profile_id           = azurerm_traffic_manager_profile.lab04b.id
   always_serve_enabled = true
   weight               = 100
   target_resource_id   = azurerm_windows_web_app.lab04b02.id
 }
-
-# resource "azurerm_traffic_manager_external_endpoint" "lab04b01" {
-#   profile_id        = azurerm_traffic_manager_profile.lab04b.id
-#   name              = "endpoint1"
-#   target            = "www.contoso.com"
-#   endpoint_location = "eastus"
-#   weight            = 50
-# }
-
-# resource "azurerm_traffic_manager_external_endpoint" "lab04b02" {
-#   profile_id        = azurerm_traffic_manager_profile.lab04b.id
-#   name              = "endpoint2"
-#   target            = "www.fabrikam.com"
-#   endpoint_location = "westus"
-#   weight            = 50
-# }
 
 resource "azurerm_service_plan" "lab04b01" {
   name                = "${local.lab04b_name}-app-plan-01-${local.random_str}"

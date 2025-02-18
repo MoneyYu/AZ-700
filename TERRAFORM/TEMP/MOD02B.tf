@@ -227,7 +227,7 @@ resource "azurerm_windows_virtual_machine" "lab02b01" {
   os_disk {
     name                 = "${local.lab02b_name}-osdisk-01-${local.random_str}"
     caching              = "ReadWrite"
-    storage_account_type = "Premium_LRS"
+    storage_account_type = "Standard_LRS"
   }
 
   source_image_reference {
@@ -275,7 +275,7 @@ resource "azurerm_windows_virtual_machine" "lab02b02" {
   os_disk {
     name                 = "${local.lab02b_name}-osdisk-02-${local.random_str}"
     caching              = "ReadWrite"
-    storage_account_type = "Premium_LRS"
+    storage_account_type = "Standard_LRS"
   }
 
   source_image_reference {
@@ -323,7 +323,7 @@ resource "azurerm_windows_virtual_machine" "lab02b03" {
   os_disk {
     name                 = "${local.lab02b_name}-osdisk-03-${local.random_str}"
     caching              = "ReadWrite"
-    storage_account_type = "Premium_LRS"
+    storage_account_type = "Standard_LRS"
   }
 
   source_image_reference {

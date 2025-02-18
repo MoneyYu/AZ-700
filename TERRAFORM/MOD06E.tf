@@ -1,4 +1,5 @@
-## LAB-06-E-FIREWALL-Manager
+## LAB-06-E-FIREWALL-MANAGER
+### https://learn.microsoft.com/en-us/azure/firewall-manager/quick-secure-virtual-hub-terraform
 resource "azurerm_virtual_wan" "lab06e" {
   name                           = "${local.lab06e_name}-vwan-${local.random_str}"
   location                       = azurerm_resource_group.rg.location
@@ -220,7 +221,7 @@ resource "azurerm_network_interface_security_group_association" "lab06ejump" {
 }
 
 resource "azurerm_windows_virtual_machine" "lab06eworkload" {
-  name                  = "${local.lab06e_name}-vm-workload-${local.random_str}"
+  name                  = "${local.lab06e_name}-vm-1-${local.random_str}"
   resource_group_name   = azurerm_resource_group.rg.name
   location              = azurerm_resource_group.rg.location
   size                  = local.vm_size
@@ -246,7 +247,7 @@ resource "azurerm_windows_virtual_machine" "lab06eworkload" {
 }
 
 resource "azurerm_windows_virtual_machine" "lab06ejump" {
-  name                  = "${local.lab06e_name}-vm-jump-${local.random_str}"
+  name                  = "${local.lab06e_name}-vm-2-${local.random_str}"
   resource_group_name   = azurerm_resource_group.rg.name
   location              = azurerm_resource_group.rg.location
   size                  = local.vm_size

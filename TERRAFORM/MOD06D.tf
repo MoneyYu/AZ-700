@@ -76,7 +76,7 @@ resource "azurerm_firewall" "lab06d" {
   firewall_policy_id = azurerm_firewall_policy.lab06d.id
 
   ip_configuration {
-    name                 = "configuration"
+    name                 = "${local.lab06d_name}-fw-pip-${local.random_str}"
     subnet_id            = azurerm_subnet.lab06dfirewall.id
     public_ip_address_id = azurerm_public_ip.lab06d.id
   }
@@ -260,7 +260,7 @@ resource "azurerm_windows_virtual_machine" "lab06d" {
   os_disk {
     name                 = "${local.lab06d_name}-osdisk-${local.random_str}"
     caching              = "ReadWrite"
-    storage_account_type = "Premium_LRS"
+    storage_account_type = "Standard_LRS"
   }
 
   source_image_reference {

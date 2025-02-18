@@ -11,21 +11,31 @@ resource "azurerm_virtual_network" "lab05a" {
 }
 
 resource "azurerm_subnet" "lab05asub01" {
-  name                 = "backend"
+  name                 = "backend-sub"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.lab05a.name
   address_prefixes     = ["10.10.1.0/24"]
 }
 
 resource "azurerm_subnet" "lab05asub02" {
-  name                 = "frontend"
+  name                 = "frontend-sub"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.lab05a.name
   address_prefixes     = ["10.10.2.0/24"]
 }
 
+resource "azurerm_subnet_network_security_group_association" "lab05a01" {
+  subnet_id                 = azurerm_subnet.lab05asub01.id
+  network_security_group_id = azurerm_network_security_group.lab05a.id
+}
+
+resource "azurerm_subnet_network_security_group_association" "lab05a02" {
+  subnet_id                 = azurerm_subnet.lab05asub02.id
+  network_security_group_id = azurerm_network_security_group.lab04a.id
+}
+
 resource "azurerm_public_ip" "lab05a" {
-  name                = "${local.lab05a_name}-pip-${local.random_str}"
+  name                = "${local.lab05a_name}-app-gw-pip-${local.random_str}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   allocation_method   = "Static"
@@ -41,6 +51,7 @@ resource "azurerm_application_gateway" "lab05a" {
   name                = "${local.lab05a_name}-appgw-${local.random_str}"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
+  enable_http2        = true
 
   sku {
     name     = "Standard_v2"
@@ -141,11 +152,6 @@ resource "azurerm_network_interface" "lab05a01" {
   }
 }
 
-resource "azurerm_network_interface_security_group_association" "lab05a01" {
-  network_interface_id      = azurerm_network_interface.lab05a01.id
-  network_security_group_id = azurerm_network_security_group.lab05a.id
-}
-
 resource "azurerm_windows_virtual_machine" "lab05a01" {
   name                  = "${local.lab05a_name}-vm01-${local.random_str}"
   location              = azurerm_resource_group.rg.location
@@ -156,7 +162,7 @@ resource "azurerm_windows_virtual_machine" "lab05a01" {
   os_disk {
     name                 = "${local.lab05a_name}-vm-01-osdisk-${local.random_str}"
     caching              = "ReadWrite"
-    storage_account_type = "Premium_LRS"
+    storage_account_type = "Standard_LRS"
   }
 
   source_image_reference {
@@ -210,11 +216,6 @@ resource "azurerm_network_interface" "lab05a02" {
   }
 }
 
-resource "azurerm_network_interface_security_group_association" "lab05a02" {
-  network_interface_id      = azurerm_network_interface.lab05a02.id
-  network_security_group_id = azurerm_network_security_group.lab05a.id
-}
-
 resource "azurerm_windows_virtual_machine" "lab05a02" {
   name                  = "${local.lab05a_name}-vm02-${local.random_str}"
   location              = azurerm_resource_group.rg.location
@@ -225,7 +226,7 @@ resource "azurerm_windows_virtual_machine" "lab05a02" {
   os_disk {
     name                 = "${local.lab05a_name}-vm-02-osdisk-${local.random_str}"
     caching              = "ReadWrite"
-    storage_account_type = "Premium_LRS"
+    storage_account_type = "Standard_LRS"
   }
 
   source_image_reference {
